@@ -1,5 +1,5 @@
 # JsonParser
 Run:
-\ncd src
-\njavac *
-\njava JsonParser
+*cd src
+*javac *
+*java JsonParser
