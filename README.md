@@ -1,5 +1,5 @@
 # JsonParser
 Run:
->cd src
->javac *
->java JsonParser
+cd src
+javac *
+java JsonParser
