@@ -1,0 +1,84 @@
+Changes...
+
+1. class variables
++ List<Integer> m_numbers becomes a HashSet<Integer>
++ List<String> m_strings becomes a HashSet<String>
+  -drastically benefits methods removeString() and containsNumber()
+
+2. constructor:
++ added null checks, use ternary to instantiate variable if argument was null
+  -this assumes we should NOT allow null class variables, requires no null check from class methods
+  -to save space, class methods could perform null check, and default to a value on null (see below)
+
+3. equals()
++ check if inputted obj is an instance of 'this' or null
++ check if inputted obj is of the same class as Test
++ if they are both Test objects, compare their m_name fields
+
+4. toString()
++ no need to store the string in variable 'out', simply return the value
++ might be better to use a StringBuilder, but Java probably optimizes this line to do so anyway
+
+5. removeString()
++ worst case is removed by using HashSet
++ if we allow for null member variables, we can default to returning empty string if m_strings is null 
+
+6. containsNumber()
++ worst case is removed by using HashSet
++ if we allow for null member variables, we can default to returning false if m_numbers is null
+
+
+
+-------------------------------------------------------------------------------------
+
+package question2;
+
+import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+
+public class Test {
+	private Date m_time;
+	private String m_name;
+	private HashSet<Integer> m_numbers;
+	private HashSet<String> m_strings;
+	
+	public Test(Date time, String name, List<Integer> numbers, List<String> strings) {
+		m_time = time == null ? new Date()   : time;
+		m_name = name == null ? new String() : name;
+		m_numbers = numbers == null ? new HashSet<Integer>() : new HashSet<Integer>(numbers); 
+		m_strings = strings == null ? new HashSet<String>()  : new HashSet<String>(strings);
+		
+	}
+	
+	public boolean equals(Object obj) {
+		if(obj == this) return true;
+		if(obj == null) return false;
+		if(getClass() != obj.getClass()) return false;
+		
+		return m_name.equals(((Test) obj).m_name);
+	}
+	
+	public String toString() {
+		return m_name + m_numbers.toString();
+	}
+	
+	public void removeString(String str) {
+		m_strings.remove(str);
+	}
+	
+	public boolean containsNumber(int number){
+		return m_numbers.contains(number);
+	}
+	
+	public boolean isHistoric() {
+		return m_time.before(new Date());
+	}
+	
+	public static void main(String [] args) {
+		String v = new String();
+		Test t = new Test(null, "hi", null, null);
+		System.out.println(v.isEmpty());
+	}
+	
+}
