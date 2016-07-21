@@ -1,0 +1,7 @@
+Cache should offer:
+- containsValue(key), returns true if cache has the corresponding value, or false if it does not
+- getValue(key), obtains the value of the given key (provided the cache contains the value)
+- put(key, value), inserts a key-value pair into the cache.
+- remove(key), removes the key-value pair from the cache
+
+(to be continued)
